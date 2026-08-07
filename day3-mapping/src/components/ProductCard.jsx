@@ -5,7 +5,7 @@ const ProductCard = ({ product, deleteProduct }) => {
     <div className="flex p-4 border flex-col gap-2 border-white rounded-xl">
       <div className="h-40">
         <img
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover" 
           src={product.image}
           alt=""
         />

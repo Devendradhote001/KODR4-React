@@ -9,7 +9,7 @@ const Form = () => {
 
   console.log(formData);
 
-  let handleChange = (e) => {
+  let handleChange = (e) => { 
     let { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
