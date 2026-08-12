@@ -1,7 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Form = ({ setUsersData, usersData, setToggle, updateUserData }) => {
+  let count = 0;
+  console.log("hello");
+
+  useEffect(() => {
+    console.log("i m effect");
+  }, []);
+
+  useLayoutEffect(() => {
+    console.log("Layout effect");
+
+    return () => {
+      console.log("me unmounting hu");
+    };
+  }, []);
+
+  console.log("hey im down");
+
   let {
     register,
     handleSubmit,
@@ -36,6 +53,7 @@ const Form = ({ setUsersData, usersData, setToggle, updateUserData }) => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+      <button onClick={() => (count = count + 1)}>Increment</button>
       <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-xl">
         {/* Header */}
         <div className="mb-7">
@@ -45,6 +63,7 @@ const Form = ({ setUsersData, usersData, setToggle, updateUserData }) => {
             Add a new user to your application
           </p>
         </div>
+        {console.log("pol")}
 
         <form onSubmit={handleSubmit(formSubmit)} className="space-y-5">
           {/* Name */}

@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "./components/Form";
 import UserCard from "./components/UserCard";
+import axios from "axios";
 
 const App = () => {
   const [toggle, setToggle] = useState(false);
+  const [productsData, setProductsData] = useState([]);
+  console.log(productsData);
   const [usersData, setUsersData] = useState(
     JSON.parse(localStorage.getItem("usersData")) || []
   );
   const [updateUserData, setUpdateUserData] = useState(null);
 
-  console.log("app", updateUserData);
+  let getProductsData = async () => {
+    try {
+      let res = await axios.get("https://fakestoreapi.com/products");
+      console.log(res);
+      setProductsData(res.data);
+    } catch (error) {
+      console.log("error in api", error);
+    }
+  };
+
+  useEffect(() => {
+    getProductsData();
+  }, []);
 
   return (
     <div>
@@ -26,7 +41,7 @@ const App = () => {
         />
       ) : (
         <div className="flex flex-col gap-5">
-          {usersData.map((val) => (
+          {productsData.map((val) => (
             <UserCard
               key={val.id}
               setToggle={setToggle}
