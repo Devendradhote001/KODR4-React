@@ -2,8 +2,8 @@ import React from "react";
 import { Star } from "lucide-react";
 import { useContextData } from "../context/ProductContext";
 
-const ProductCard = ({ product }) => {
-  let { setCartItems, isCartOpen } = useContextData();
+const ProductCard = ({ product, isInCart }) => {
+  let { setCartItems, isCartOpen, increaseQuantity } = useContextData();
 
   return (
     <div className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 hover:-translate-y-2">
@@ -50,16 +50,24 @@ const ProductCard = ({ product }) => {
 
         {/* Button */}
 
-        {isCartOpen ? (
-          <button
-            onClick={() => setCartItems((prev) => [...prev, product])}
-            className="mt-2 bg-red-700 text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition duration-300 cursor-pointer"
-          >
-            Remove from cart
-          </button>
+        {isInCart ? (
+          <div className="flex w-full justify-between items-center">
+            <button className="p-3 bg-red-600 text-white border-0 rounded">
+              -
+            </button>
+            <p className="text-2xl">{isInCart.quantity}</p>
+            <button
+              onClick={() => increaseQuantity(product.id)}
+              className="p-3 bg-green-600 text-white border-0 rounded"
+            >
+              +
+            </button>
+          </div>
         ) : (
           <button
-            onClick={() => setCartItems((prev) => [...prev, product])}
+            onClick={() =>
+              setCartItems((prev) => [...prev, { ...product, quantity: 1 }])
+            }
             className="mt-2 bg-black text-white py-3 rounded-xl font-semibold hover:bg-gray-800 transition duration-300 cursor-pointer"
           >
             Add to Cart

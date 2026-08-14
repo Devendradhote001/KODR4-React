@@ -7,7 +7,6 @@ export const ContextProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [productsData, setProductsData] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  console.log(cartItems);
   let getProductsData = async () => {
     try {
       let res = await axios.get("https://fakestoreapi.com/products");
@@ -23,6 +22,18 @@ export const ContextProvider = ({ children }) => {
     getProductsData();
   }, []);
 
+  let increaseQuantity = (productId) => {
+    setCartItems((prev) => {
+      let data = prev.map((val) => {
+        return val.id === productId
+          ? { ...val, quantity: val.quantity + 1 }
+          : val;
+      });
+      console.log(data);
+      return data;
+    });
+  };
+
   return (
     <MyCart.Provider
       value={{
@@ -32,6 +43,7 @@ export const ContextProvider = ({ children }) => {
         setCartItems,
         isCartOpen,
         setIsCartOpen,
+        increaseQuantity,
       }}
     >
       {children}

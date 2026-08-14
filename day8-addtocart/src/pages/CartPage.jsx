@@ -1,6 +1,6 @@
 import React from "react";
 import { useContextData } from "../context/ProductContext";
-import ProductCard from "../components/ProductCart";
+import ProductCard from "../components/ProductCard";
 
 const CartPage = () => {
   let { cartItems } = useContextData();
