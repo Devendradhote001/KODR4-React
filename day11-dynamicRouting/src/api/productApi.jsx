@@ -2,6 +2,7 @@ import { axiosInstance } from "../config/axiosInstance";
 
 export const getProductsApi = async () => {
   try {
+    console.log("called...")
     let res = await axiosInstance.get("/products");
     console.log(res);
     return res.data;
