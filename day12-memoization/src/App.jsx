@@ -16,7 +16,7 @@ const App = () => {
       sum += i;
     }
     return sum;
-  }, [count]);
+  }, [count]); 
 
   const [user, setUser] = useState({
     name: "hello",
